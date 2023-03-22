@@ -1,0 +1,11 @@
+print("Welcome to the 'Bill dispute settler between friends' App.\n")
+total = input("So, how much money in $ did you all burn.? $")
+total = float(total)
+tip = input("Percentage of tip? 10 12 or 15?: ")
+tip = int(tip)
+people = input("Total no of people?: ")
+people = int(people)
+
+amount = round(((total*(tip/100))+total)/people, 2)
+amount = "{:.2f}".format(amount)
+print(f"Each of you shell out ${amount}")
