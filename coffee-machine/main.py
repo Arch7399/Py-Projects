@@ -69,6 +69,12 @@ def currency_converter(qua, dim, nick, pen):
     dollar = pen*0.01 + nick*0.05 + dim*0.1 + qua*0.25
     return dollar
 
+def rss_check(drink):
+    for key in resources:
+        if key in MENU[drink]["ingredients"]:
+            if resources[key] < MENU[drink]["ingredients"][key]:
+                return False
+
 def resource_deductor(drink):
     for key in resources:
         if key in MENU[drink]["ingredients"]:
@@ -94,7 +100,14 @@ print(logo)
 
 while machine_online:
     drink = input("What do you want? (espresso / latte / cappuccino) *other options include 'report'/'recharge'*: ")
+    if drink != "recharge" and drink != "report": 
+        check = rss_check(drink)
+        if check is False:
+            print("Sorry, insufficient ingredients in machine. Please recharge resources.")
+            continue
     coffee_vending(drink)
     machine_toggle = input("Do you want to turn off the machine? 'y' or 'n': ")
     if machine_toggle == 'y'.lower():
         machine_online = False
+        
+#added sufficient resource check
